@@ -17,9 +17,6 @@ vnoremap <silent> <s-enter> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(fi
     inoremap <silent> <c-\> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`Pa
     vnoremap <silent> <c-\> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
 "hy support
-    "nnoremap <silent> <c-]> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hyexec(hyfiltcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
-    "inoremap <silent> <c-]> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hyexec(hyfiltcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>a
-    "vnoremap <silent> <c-]> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 hyexec(hyfiltcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
     nnoremap <silent> <c-]> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
     inoremap <silent> <c-]> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>a
     vnoremap <silent> <c-]> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
@@ -49,13 +46,10 @@ import numpy as np
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+class blank: pass
 try:
     import hy
-    #def hyexec(scode):
-    #    print('exec',scode)
-    #    return hy.eval(hy.read_str(scode))
 except:
-    class blank: pass
     hy = blank()
     def _dumfun(*args, **kwargs): pass
     hy.read_Str = _dumfun
@@ -94,7 +88,6 @@ def filtcode():
     return cocparse('\n'.join(code))
 
 def hyfiltcode():
-    #mout.removeindent()
     code = [q for q in vim.eval("@p").split('\n') if q and len(q)>0]
     return '(do ' + '\n'.join(code) + ' )'
 
