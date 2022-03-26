@@ -5,21 +5,21 @@ let $PYPLUGPATH .= expand('<sfile>:p:h') "used to import .py files from plugin d
 command! Vython normal :vsp<enter><c-w><c-l>:e ~/pythonbuff.py<cr>:call Vythonload()<cr><c-w><c-h>
 nnoremap <silent> <F10> :vsp<enter><c-w><c-l>:e ~/pythonbuff.py<cr>:call Vythonload()<cr><c-w><c-h>
 
-nnoremap <silent> <F5> mPggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
-inoremap <silent> <F5> <esc>mPggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>a
-vnoremap <silent> <F5> mP<esc>ggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
+nnoremap <silent> <F5> mPggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
+inoremap <silent> <F5> <esc>mPggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`Pa
+vnoremap <silent> <F5> mP<esc>ggVG"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
 
-nnoremap <silent> <s-enter> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
-inoremap <silent> <s-enter> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>a
-vnoremap <silent> <s-enter> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
+nnoremap <silent> <s-enter> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
+inoremap <silent> <s-enter> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`Pa
+vnoremap <silent> <s-enter> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
 "alternate mappings for terminal/ssh usage
     nnoremap <silent> <c-\> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
     inoremap <silent> <c-\> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`Pa
     vnoremap <silent> <c-\> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 exec(filtcode())<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
 "hy support
-    nnoremap <silent> <c-]> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
-    inoremap <silent> <c-]> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>a
-    vnoremap <silent> <c-]> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>
+    nnoremap <silent> <c-]> mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
+    inoremap <silent> <c-]> <esc>mPV"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`Pa
+    vnoremap <silent> <c-]> mP"py:py3 mout.output()<cr>:redir @b<cr>:py3 hy.eval( hy.read_str(hyfiltcode()) )<cr>:redir END<cr>:py3 mout.smartprint(vim.eval("@b"))<cr>`P
 
 nnoremap <silent> <c-b> mPV"py:py3 mout.printexp()<cr>
 inoremap <silent> <c-b> <esc>mPV"py:py3 mout.printexp()<cr>a
@@ -34,8 +34,7 @@ func! Pycomplete()
     py3 vim.command("call complete(col(\'.\'), " + repr(get_completions()) + ')')
     return ''
 endfunc
- 
-func! Vythonload() 
+func! Vythonload()
 py3 << EOL
 import vim
 import sys
@@ -46,21 +45,25 @@ import numpy as np
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-class blank: pass
+class _blank: pass
 try:
     import hy
 except:
-    hy = blank()
+    hy = _blank()
     def _dumfun(*args, **kwargs): pass
     hy.read_Str = _dumfun
     hy.eval = _dumfun
     print('hy not installed')
 
 try:
-    from coconut.convenience import parse as cocparse
+    import sys as _coconut_sys
+    #from coconut.__coconut__ import *
+    from coconut.__coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _coconut_handle_cls_kwargs, _coconut_handle_cls_stargs, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_riterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec
+    from coconut.convenience import parse as _cocoparsetemp
+    def cocoparse(cocostr):
+        return '\n'.join(_cocoparsetemp(cocostr).split('\n')[6:])
 except:
-    def cocparse(strin):
-        return strin
+    cocoparse = lambda x: x
 
 
 #work-around for Python3.7/tensorflow
@@ -117,7 +120,7 @@ class outputter():
         #    vim.command('normal gv"ox')
 
         vyself.scrollbuffend()
-        vim.command('normal zz')
+        #vim.command('normal zz')
 
 
     def mprint(vyself, *args, **kwargs):
