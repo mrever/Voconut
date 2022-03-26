@@ -48,10 +48,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 class _blank: pass
 try:
     import hy
-    try:
-        hy.eval( hy.read_str(  "(require [hy.contrib.walk [let]])"   ))
-    except:
-        pass # this should only happen on new versions of hy with let builtin
 except:
     hy = _blank()
     def _dumfun(*args, **kwargs): pass
