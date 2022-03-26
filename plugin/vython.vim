@@ -48,7 +48,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 class _blank: pass
 try:
     import hy
-    hy.eval( hy.read_str(  ("require [hy.contrib.walk [let]]")   ))
+    hy.eval( hy.read_str(  "(require [hy.contrib.walk [let]])"   ))
 except:
     hy = _blank()
     def _dumfun(*args, **kwargs): pass
@@ -89,7 +89,7 @@ def filtcode():
         code = [q if q.strip()[0]!='!' else fconv(q) for q in code]
     else:
         code = [q for q in code if q and len(q.strip())>0 and q.strip()[0]!='!']
-    return cocparse('\n'.join(code))
+    return cocoparse('\n'.join(code))
 
 def hyfiltcode():
     code = [q for q in vim.eval("@p").split('\n') if q and len(q)>0]
