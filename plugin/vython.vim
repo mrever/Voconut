@@ -90,9 +90,9 @@ def filtcode():
     else:
         code = [q for q in code if q and len(q.strip())>0 and q.strip()[0]!='!']
     #try:
-    #    parsedout = cocoparse('\n'.join(code))
+    parsedout = cocoparse('\n'.join(code))
     #except:
-    parsedout = ('\n'.join(code))
+        #parsedout = ('\n'.join(code))
     return parsedout
 
 def hyfiltcode():
