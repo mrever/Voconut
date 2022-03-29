@@ -89,10 +89,10 @@ def filtcode():
         code = [q if q.strip()[0]!='!' else fconv(q) for q in code]
     else:
         code = [q for q in code if q and len(q.strip())>0 and q.strip()[0]!='!']
-    try:
-        parsedout = cocoparse('\n'.join(code))
-    except:
-        parsedout = ('\n'.join(code))
+    #try:
+    #    parsedout = cocoparse('\n'.join(code))
+    #except:
+    parsedout = ('\n'.join(code))
     return parsedout
 
 def hyfiltcode():
